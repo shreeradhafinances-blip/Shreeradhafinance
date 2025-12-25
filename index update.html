@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRCCS — Digital Office Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#004c8f;      /* HDFC Blue */
+  --primary-light:#e8f1fb;
+  --bg:#f4f6f9;
+  --card:#ffffff;
+  --border:#d0d7e2;
+  --text:#1f2937;
+  --muted:#6b7280;
+}
+
+/* Base */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"Segoe UI","Inter","Noto Sans Devanagari",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* ================= HEADER ================= */
+header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  height:72px;
+  background:#fff;
+  border-bottom:3px solid var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  z-index:1000;
+}
+header .left{display:flex;align-items:center;gap:12px}
+header img{
+  height:52px;width:52px;
+  object-fit:contain;
+}
+header .info strong{
+  font-size:17px;
+  font-weight:700;
+  color:var(--primary);
+}
+header .info small{
+  display:block;
+  font-size:12px;
+  color:#444;
+}
+header .right{
+  text-align:right;
+  font-size:12px;
+  color:#333;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+  position:fixed;
+  top:72px;left:0;
+  width:250px;
+  height:calc(100% - 72px);
+  background:#ffffff;
+  border-right:1px solid var(--border);
+  padding:10px;
+  overflow-y:auto;
+}
+.sidebar::-webkit-scrollbar{width:5px}
+.sidebar::-webkit-scrollbar-thumb{background:#ccc}
+
+/* Menu */
+.menu-item{
+  padding:11px 14px;
+  margin-bottom:6px;
+  border-radius:4px;
+  font-size:14px;
+  font-weight:600;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  border:1px solid transparent;
+}
+.menu-item span{display:flex;align-items:center;gap:8px}
+.menu-item i{font-size:17px;color:var(--primary)}
+
+.menu-item:hover{
+  background:var(--primary-light);
+  border-color:#c6dbf5;
+}
+
+/* Submenu */
+.submenu{
+  display:none;
+  margin:4px 0 8px 8px;
+  border-left:3px solid var(--primary);
+}
+.submenu a{
+  display:block;
+  padding:8px 14px;
+  font-size:13px;
+  color:#222;
+  text-decoration:none;
+}
+.submenu a:hover{
+  background:#f1f6fd;
+  color:var(--primary);
+}
+
+/* ================= CONTENT ================= */
+.content{
+  margin-left:250px;
+  margin-top:82px;
+  padding:16px;
+}
+iframe{
+  width:100%;
+  height:80vh;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+/* Welcome */
+.welcome{
+  height:80vh;
+  background:#fff;
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.welcome-box{
+  text-align:center;
+}
+.welcome-box i{
+  font-size:60px;
+  color:var(--primary);
+}
+.welcome-box h2{
+  font-size:16px;
+  color:#555;
+}
+.welcome-box h1{
+  font-size:30px;
+  color:var(--primary);
+  margin:6px 0;
+}
+.welcome-box p{
+  font-size:14px;
+  color:#333;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  position:fixed;
+  bottom:0;
+  left:250px;
+  width:calc(100% - 250px);
+  background:#fff;
+  border-top:1px solid var(--border);
+  text-align:center;
+  font-size:12px;
+  padding:6px;
+  color:#444;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .sidebar{width:220px}
+  .content{margin-left:220px}
+  footer{left:220px;width:calc(100% - 220px)}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="left">
+    <img src="logo.jpeg" alt="Logo">
+    <div class="info">
+      <strong>Shree Radha Credit Co-operative Society Ltd., Gujri (Dhamnod)</strong>
+      <small>Reg. No.: DR/DHR/151716</small>
+      <small>"सहकार का नया रूप – डिजिटल समाज का स्वरूप!"</small>
+    </div>
+  </div>
+  <div class="right">
+    <div><b>Mob:</b> +91 83700 22176, 8889137464</div>
+    <div><b>Address:</b> In front of Chatrawas, Gram Panchayat Gujri,<br>Sub District Dharmapuri, District Dhar - 454552</div>
+  </div>
+</header>
+
+<div class="sidebar">
+
+  <div class="menu-item" onclick="openForm('DebitCreditReport.html')">
+    <span><i class="ri-exchange-dollar-line"></i> 1. DEBIT / CREDIT Report</span>
+  </div>
+
+  <div class="menu-item" onclick="toggleSubmenu('accounts')">
+    <span><i class="ri-bank-line"></i> 2. Accounts</span>
+    <i class="ri-arrow-down-s-line"></i>
+  </div>
+  <div class="submenu" id="accounts">
+    <a href="#" onclick="openForm('AccountNumberGenerate.html')">2.1 Account Number Granted</a>
+    <a href="#" onclick="openForm('NewAccountHolders.html')">2.2 New Account Holders Details</a>
+  </div>
+
+  <div class="menu-item" onclick="toggleSubmenu('loanBoard')">
+    <span><i class="ri-hand-coin-line"></i> 3. Loan Board</span>
+    <i class="ri-arrow-down-s-line"></i>
+  </div>
+  <div class="submenu" id="loanBoard">
+    <a href="#" onclick="openForm('LoanRegistration.html')">3.1 Loan Registration</a>
+    <a href="#" onclick="openForm('LoanApprovalForm.html')">3.2 Loan Approval Form</a>
+    <a href="#" onclick="openForm('CurrentLoanPayment.html')">3.3 Current Loan Payment</a>
+    <a href="#" onclick="openForm('LoanDebitCredit.html')">3.6 Loan Credit/Debit</a>
+    <a href="#" onclick="openForm('LoanCalculator.html')">3.4 Calculate Loan</a>
+    <a href="#" onclick="openForm('FD_RD_Calculator.html')">3.5 FD/RD Calculator</a>
+  </div>
+
+  <div class="menu-item" onclick="toggleSubmenu('reports')">
+    <span><i class="ri-bar-chart-box-line"></i> 4. Reports</span>
+    <i class="ri-arrow-down-s-line"></i>
+  </div>
+  <div class="submenu" id="reports">
+    <a href="#" onclick="openForm('DailyCollectionEntries.html')">4.1 Daily Collection Entries</a>
+    <a href="#" onclick="openForm('CashBook.html')">4.2 Cash Book</a>
+    <a href="#" onclick="openForm('BillReports.html')">4.3 Bill Reports</a>
+    <a href="#" onclick="openForm('LetterPad.html')">4.4 Letter Pad</a>
+  </div>
+
+  <div class="menu-item" onclick="toggleSubmenu('documents')">
+    <span><i class="ri-file-list-3-line"></i> 5. Documents</span>
+    <i class="ri-arrow-down-s-line"></i>
+  </div>
+  <div class="submenu" id="documents">
+    <a href="#" onclick="openForm('LoanNOC.html')">5.1 Loan NOC</a>
+    <a href="#" onclick="openForm('LoanDocuments.html')">5.2 Loan Documents</a>
+    <a href="#" onclick="openForm('Loan120Documents.html')">5.3 120 Loan Documents</a>
+    <a href="#" onclick="openForm('OfficeNotices.html')">5.4 Office Notices</a>
+  </div>
+
+</div>
+
+<div class="content" id="mainContent">
+  <div class="welcome" id="welcomeMessage">
+    <div class="welcome-box">
+      <i class="ri-bank-fill"></i>
+      <h2>Welcome to</h2>
+      <h1>Digital Office Portal</h1>
+      <p>Shree Radha Credit Co-operative Society Limited</p>
+    </div>
+  </div>
+  <iframe id="formFrame" src="" style="display:none;"></iframe>
+</div>
+
+<footer>
+  © 2025 Shree Radha Credit Co-operative Society | Reg. No: DR/DHR/151716
+</footer>
+
+<script>
+function toggleSubmenu(id){
+  const submenu=document.getElementById(id);
+  const arrow=submenu?.previousElementSibling?.querySelector('.ri-arrow-down-s-line');
+  document.querySelectorAll('.submenu').forEach(s=>{
+    if(s!==submenu){
+      s.style.display='none';
+      const ic=s.previousElementSibling.querySelector('.ri-arrow-down-s-line');
+      if(ic) ic.style.transform='rotate(0deg)';
+    }
+  });
+  if(submenu.style.display==='flex'){
+    submenu.style.display='none';
+    arrow.style.transform='rotate(0deg)';
+  }else{
+    submenu.style.display='flex';
+    arrow.style.transform='rotate(180deg)';
+  }
+}
+
+function openForm(url){
+  document.getElementById('welcomeMessage').style.display='none';
+  const frame=document.getElementById('formFrame');
+  frame.style.display='block';
+  frame.src=url;
+}
+</script>
+</body>
+</html>
